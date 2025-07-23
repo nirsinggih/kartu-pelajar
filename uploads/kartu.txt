@@ -1,0 +1,21 @@
+Nama,NIS,NISN,Kelas,Jenis Kelamin,Tempat Lahir,Tanggal Lahir
+Ahmad Fauzi,101,990001,6A,L,Jakarta,2012-03-01
+Budi Santoso,102,990002,6A,L,Bandung,2012-06-12
+Citra Lestari,103,990003,6A,P,Bekasi,2012-04-22
+Dina Kurnia,104,990004,6A,P,Tangerang,2012-05-15
+Eko Prasetyo,105,990005,6A,L,Bogor,2012-01-17
+Fajar Hidayat,106,990006,6B,L,Depok,2012-02-10
+Gita Permata,107,990007,6B,P,Surabaya,2012-03-19
+Hani Maharani,108,990008,6B,P,Semarang,2012-07-21
+Ilham Ramadhan,109,990009,6B,L,Yogyakarta,2012-09-11
+Joko Anwar,110,990010,6B,L,Malang,2012-11-25
+Kiki Aulia,111,990011,6C,P,Bandung,2012-01-29
+Lia Wulandari,112,990012,6C,P,Bekasi,2012-05-05
+Mila Kartika,113,990013,6C,P,Bogor,2012-06-06
+Nina Sari,114,990014,6C,P,Jakarta,2012-08-08
+Oki Prabowo,115,990015,6C,L,Tangerang,2012-09-09
+Putri Ayu,116,990016,6D,P,Depok,2012-10-10
+Qori Maulida,117,990017,6D,P,Surabaya,2012-11-11
+Rafi Ahmad,118,990018,6D,L,Semarang,2012-12-12
+Siti Nurhaliza,119,990019,6D,P,Medan,2012-04-14
+Tono Sudrajat,120,990020,6D,L,Bogor,2012-03-03
