@@ -7,6 +7,21 @@ require('fpdf/fpdf.php');
 require('phpqrcode/qrlib.php');
 require('db.php');
 
+function tanggal_indonesia($tanggal) {
+    $bulan = [
+        1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+             'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    ];
+
+    $tanggal_obj = strtotime($tanggal);
+    $hari = date('d', $tanggal_obj);
+    $bulan_angka = date('n', $tanggal_obj);
+    $tahun = date('Y', $tanggal_obj);
+
+    return $hari . ' ' . $bulan[$bulan_angka] . ' ' . $tahun;
+}
+
+
 class PDF_Kartu extends FPDF {
     function Header() {
         // Kosongkan header jika tidak ingin ada
@@ -82,9 +97,11 @@ class PDF_Kartu extends FPDF {
             $pengaturan['nama_sekolah'] . "\n" .
             $pengaturan['alamat'], 0, 'L');
 
-        // Tanggal statis
-        $this->SetXY($x + 2, $y + 30);
-        $this->Cell(75, 5, '29 Juli 2025', 0, 1, 'R');
+		// Tanggal dinamis dari database pengaturan
+		$tanggal_ttd = tanggal_indonesia($pengaturan['tanggal_ttd']);
+		$this->SetXY($x + 2, $y + 30);
+		$this->Cell(75, 5, $tanggal_ttd, 0, 1, 'R');
+
 
         $this->SetXY($x + 2, $y + 33);
         $this->Cell(75, 5, "Kepala Sekolah,", 0, 1, 'R');
