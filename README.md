@@ -26,6 +26,12 @@ Aplikasi ini digunakan untuk mencetak kartu pelajar dengan cepat dari file excel
 - PHP QR Code
 - PHPExcel / Spout untuk Excel
 
+  ## Restore Database
+  Gunakan Database versi 2.
+  Untuk default
+  username: admin
+  password: admin123
+
 ## Contoh Tampilan
 
 ![Contoh Kartu](assets/screenshots/contoh_kartu.png)
