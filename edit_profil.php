@@ -8,6 +8,7 @@ if (!isset($_SESSION['login']) || $_SESSION['role'] !== 'admin') {
 include 'db.php';
 
 $sekolah = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM pengaturan WHERE id = 1"));
+$user = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE id = 1"));
 
 if (isset($_POST['simpan'])) {
     $nama    = $_POST['nama_sekolah'];
@@ -15,6 +16,30 @@ if (isset($_POST['simpan'])) {
     $kepala  = $_POST['kepala_sekolah'];
 	$nip_kepala  = $_POST['nip_kepala_sekolah'];
     $tanggal = $_POST['tanggal_ttd'];
+	
+// Proses ubah password admin (users.id = 1) menggunakan MD5
+if (!empty($_POST['password_lama']) || !empty($_POST['password_baru']) || !empty($_POST['konfirmasi_password'])) {
+    $password_lama = $_POST['password_lama'];
+    $password_baru = $_POST['password_baru'];
+    $konfirmasi_password = $_POST['konfirmasi_password'];
+
+    // Cocokkan dengan password md5 di database
+    if (md5($password_lama) !== $user['password']) {
+        echo "<script>alert('Password lama salah');location.href='edit_profil.php';</script>";
+        exit;
+    }
+
+    if ($password_baru !== $konfirmasi_password) {
+        echo "<script>alert('Konfirmasi password tidak cocok');location.href='edit_profil.php';</script>";
+        exit;
+    }
+
+    $password_md5 = md5($password_baru);
+    mysqli_query($conn, "UPDATE users SET password = '$password_md5' WHERE id = 1");
+}
+
+
+
 
     $logo = $sekolah['logo'];
     $ttd  = $sekolah['tanda_tangan'];
@@ -230,6 +255,21 @@ if (isset($_POST['simpan'])) {
                 <img class="preview" id="bg2_preview" style="display:none;">
             <?php endif; ?>
         </p>
+		        <hr>
+        <h3>Ubah Password Admin</h3>
+        <p>
+            <label for="password_lama">Password Lama:</label>
+            <input type="password" name="password_lama" id="password_lama">
+        </p>
+        <p>
+            <label for="password_baru">Password Baru:</label>
+            <input type="password" name="password_baru" id="password_baru">
+        </p>
+        <p>
+            <label for="konfirmasi_password">Konfirmasi Password Baru:</label>
+            <input type="password" name="konfirmasi_password" id="konfirmasi_password">
+        </p>
+
         <button type="submit" name="simpan">Simpan Pengaturan</button>
     </form>
     <a href="dashboard.php">← Kembali ke Dashboard</a>
