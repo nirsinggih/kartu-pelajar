@@ -1,8 +1,13 @@
 <?php
 // File: index.php (Login Page)
 session_start();
+include 'db.php';
+
+// Ambil data pengaturan
+$pengaturan = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM pengaturan LIMIT 1"));
+$logo_path = 'assets/logo/' . $pengaturan['logo'];
+
 if (isset($_POST['login'])) {
-    include 'db.php';
     $username = $_POST['username'];
     $password = $_POST['password'];
     
@@ -72,11 +77,16 @@ if (isset($_POST['login'])) {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 100px;
+            margin-bottom: 1rem;
         }
 
         h2 {
-            margin-top: 0;
-            text-align: center;
+            margin-top: 0.5rem;
             color: var(--primary);
         }
 
@@ -156,6 +166,9 @@ if (isset($_POST['login'])) {
 
 <main>
     <div class="login-container">
+        <?php if (file_exists($logo_path)) : ?>
+            <img src="<?= $logo_path ?>" alt="Logo Sekolah" class="logo">
+        <?php endif; ?>
         <h2>Login</h2>
         <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
         <form method="post">
@@ -164,7 +177,7 @@ if (isset($_POST['login'])) {
             <button type="submit" name="login">Login</button>
         </form>
         <p class="note"><em>Aplikasi masih dalam proses pengembangan</em></p>
-		<p class="note"><em>Siswa dapat melakukan perbaikan data dan upload foto login username: NISN, pasword: NISN</em></p>
+        <p class="note"><em>Siswa dapat melakukan perbaikan data dan upload foto login username: NISN, pasword: NISN</em></p>
     </div>
 </main>
 
